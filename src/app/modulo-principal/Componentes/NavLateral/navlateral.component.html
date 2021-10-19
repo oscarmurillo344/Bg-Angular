@@ -1,0 +1,30 @@
+<div class="container-menu-childrens fondo-submenu sombra" 
+     *ngIf="(ViewTransform | async) ? AbrirSubMenu : CerrarSubMenu"
+     [style.transform]="(ViewTransform | async) ? AbrirSubMenu : CerrarSubMenu">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-12 pt-2 cancelarCorner">
+                <a mat-icon-button class="idClose" (click)="CerrarMenu()">
+                    <mat-icon class="white">cancel</mat-icon>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <h2 class="white tituloItem"> {{ListaSubMenu?.nombre}} </h2>
+            </div>
+        </div>
+        <mat-nav-list class="w-100">
+            <a mat-list-item class="white" 
+                *ngFor="let item of ListaSubMenu?.items" 
+                (click)="CambiarLista(item)"
+                [routerLink]="item.ruta" 
+                (click)="OpcionCerrar ? CerrarMenu() : ''">
+                {{item.nombre}}
+                <mat-icon class="centrar white">
+                    {{item.icon}}
+                </mat-icon>
+            </a>
+        </mat-nav-list>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<mat-toolbar class="FixedCabecera color-fondo-bg">
+    <div class="row  w-100 align-items-center justify-content-between">
+        <div class="col-sm-4 col-md-5 col-sm-6 col-10">
+            <div class="row align-items-center">
+                <div class="col-md-2 col-3">
+                    <a (click)="sidenav.toggle()" (click)="VerificarMenu()">
+                        <img src="../../../../assets/jusLogo.png" width="40px" height="40px" />
+                    </a> 
+                </div>
+                <div class="col-auto">
+                    <div class="row">
+                        <p   class="white col-auto">NEO FINANCIAL</p>
+                    </div>
+                    <div class="row">
+                        <small class="col-auto white lead"> {{ (ViewModulos | async) }} </small> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-4 col-2">
+            <div class="row align-items-center justify-content-end">
+                <div class="col-2 mr-4 d-none d-lg-block">
+                    <p class="font-usuario white">Leonel Velez Larrea </p>
+                    <p class="font-usuario white"> {{ fechaActual | date:'yyyy-mm-dd h:mm:ss'}} </p>
+                </div>
+                <div class="col-auto">
+                    <a class="ml-4">
+                        <mat-icon matBadge="1" matBadgeColor="accent" class="white mt-2">
+                            notifications
+                        </mat-icon>
+                    </a>
+                </div>
+                <div class="col-auto d-none d-sm-flex">
+                    <a mat-button [matMenuTriggerFor]="menu" class="Expanded white">
+                        <mat-icon class="white">
+                            arrow_drop_down
+                        </mat-icon>
+                    </a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Perfil</button>
+                        <button mat-menu-item>Cerrar sesión</button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-toolbar>
+
+<app-navlateral  [ListaSubMenu]="ListaSubMenu" (newListaSubMenu)="SetSubMenu()" ></app-navlateral>
+<div class="fondoSubmenu" (click)="toogleSubmenu()" *ngIf="(ViewMenu | async)" ></div>
+
+<mat-sidenav-container class="NavContenedor">
+    <mat-sidenav #sidenav class="NavLateral color-fondo-bg" 
+                 [attr.role]="cerrarNav? 'dialog' : 'navigation'"
+                 [mode]="cerrarNav ? 'side' : 'push'" 
+                 fixedInViewport="true" 
+                 fixedTopGap="70" 
+                 [opened]="cerrarNav">
+
+        <mat-nav-list *ngFor="let menu of ListaMenu; index as i">
+                <a mat-list-item *ngIf="menu.nombre == 'Home'"
+                [routerLink]="menu.ruta"
+                (click)="!cerrarNav ? sidenav.toggle() : ''"
+                (click)="CerrarSubMenu()"
+                (click)="SetModulos(menu.nombre)" 
+                routerLinkActive="activar">
+                <mat-icon class="centrar white">
+                    {{ menu.icon }}
+                </mat-icon>
+            </a>
+            <a mat-list-item 
+                [routerLink]="menu.ruta" 
+                (click)="AbrirSubMenu()" 
+                (click)="SetSubMenu(i)"
+                (click)="SetModulos(menu.nombre)" 
+                *ngIf="menu.nombre != 'Home'"
+                routerLinkActive="activar">
+                <mat-icon class="centrar white">
+                    {{ menu.icon }}
+                </mat-icon>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="Contenedor">
+        <app-home></app-home>
+    </mat-sidenav-content>
+</mat-sidenav-container>

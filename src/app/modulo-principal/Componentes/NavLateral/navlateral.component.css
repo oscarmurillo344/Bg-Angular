@@ -1,0 +1,41 @@
+.container-menu-childrens
+{
+  height: 100%;
+  position: fixed;
+  top: 70px;
+  width:220px;
+  left: 70px;
+  display: flex;
+  visibility: visible;
+  flex-direction: column;
+  align-items: flex-start;
+  transform-origin: left;
+  transition-duration: 0.2s;
+  z-index: 5;
+}
+.fondo-submenu{
+  background: rgb(22, 15, 65, 0.8);
+}
+.idClose :hover{
+  cursor: pointer;
+}
+.tituloItem
+{
+  margin-left: 24px;
+  margin-right: auto;
+  margin-top: 10px;
+  color: white;
+  display: flex;
+  font-size: 17px;
+}
+
+.cancelarCorner{
+  padding-left: 80%;
+}
+
+.sombra{
+  -webkit-moz-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -webkit-box-shadow: 4px 3px 7px rgb(0,0,0,0.9);
+  -moz-box-shadow: 4px 3px 7px rgb(0,0,0,0.9);
+}

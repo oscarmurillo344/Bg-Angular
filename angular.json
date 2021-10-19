@@ -24,7 +24,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap-4-grid/css/grid.css",
+              "src/custom-theme.scss",
               "src/styles.css"
+              
             ],
             "scripts": []
           },
