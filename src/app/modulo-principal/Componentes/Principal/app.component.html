@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-auto">
                     <div class="row">
-                        <p   class="white col-auto">NEO FINANCIAL</p>
+                        <p   class="tituloPrincipal white col-auto">NEO FINANCIAL</p>
                     </div>
                     <div class="row">
                         <small class="col-auto white lead"> {{ (ViewModulos | async) }} </small> 
@@ -65,7 +65,7 @@
                 (click)="CerrarSubMenu()"
                 (click)="SetModulos(menu.nombre)" 
                 routerLinkActive="activar">
-                <mat-icon class="centrar white">
+                <mat-icon class="mx-auto white">
                     {{ menu.icon }}
                 </mat-icon>
             </a>
@@ -75,8 +75,9 @@
                 (click)="SetSubMenu(i)"
                 (click)="SetModulos(menu.nombre)" 
                 *ngIf="menu.nombre != 'Home'"
+                [ngStyle]="{'margin-top.px': menu.nombre == 'Configuraciones' ? '220':'0'}"
                 routerLinkActive="activar">
-                <mat-icon class="centrar white">
+                <mat-icon class="mx-auto white">
                     {{ menu.icon }}
                 </mat-icon>
             </a>

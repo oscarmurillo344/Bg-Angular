@@ -136,6 +136,7 @@ export class AppComponent implements OnInit {
     );
   ViewMenu = this._dataMenu.$toogleMenu
   ViewModulos = this._dataMenu.$ModulosRaiz
+  Nombre:string=""
   ListaMenu:Array<MenuListBg> = menu
   ListaSubMenu:MenuListBg
 
@@ -161,10 +162,12 @@ export class AppComponent implements OnInit {
    this._dataMenu.AbrirMenu()
   }
   CerrarSubMenu(): void{
-    this._dataMenu.CerrarMenu()
+      this._dataMenu.CerrarMenu()
   }
   SetSubMenu(index:number=0): void{
-    if(index==0 && !this.cerrarNav) this.sidenav.toggle()
+    if(index==0 && !this.cerrarNav){
+      this.sidenav.toggle()
+    }
     this.ListaSubMenu = this.ListaMenu[index]
 
   }

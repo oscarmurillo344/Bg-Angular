@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { D0Types } from '@swimlane/ngx-charts';
 const data: any[] = [
   {
     "name": "South Korea",
@@ -137,32 +141,44 @@ export class HomeComponent implements OnInit {
   multi: any[] = data.map( d=> {
     d.series.map( dt => {
       let datePi = new DatePipe("en-US")
-      dt.name = datePi.transform(dt.name,"dd MMMM")
+      dt.name = datePi.transform(dt.name,"dd-MMM")
       return dt
     })
     return d
   })
-  view: any[] = [550, 500];
-
+  view: any[] = [undefined, undefined];
   // options
-  legend: boolean = true;
-  showLabels: boolean = true;
-  animations: boolean = true;
+  legend: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  showYAxisLabel: boolean = true;
+  showYAxisLabel: boolean = false;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
   timeline: boolean = true;
 
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe([
+    Breakpoints.Medium,
+    Breakpoints.Large,
+    Breakpoints.XLarge
+  ]).pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
-  constructor() { }
+  constructor(
+    private breakpointObserver: BreakpointObserver
+  ) { }
   
   ngOnInit(): void {
+    this.isHandset$.subscribe( (data:boolean) => {
+    if(!data){
+      this.view = [undefined,undefined] 
+    }else{
+      this.view = [310, undefined];
+    }
+    })
   }
 
   onSelect(data:any): void {

@@ -1,8 +1,12 @@
 .FixedCabecera{
     position: fixed;
-    height: 70px;
+    height: 74px;
     width: 100%;
     z-index: 2;
+}
+.tituloPrincipal {
+    font-size: 20px;
+    letter-spacing: 4px;
 }
 .lead{
     margin: -20px 0px;
@@ -20,9 +24,8 @@
 }
 .NavContenedor .Contenedor{
     margin-top: 85px;
-}
-.centrar{
-    margin: auto;
+    margin-left: 40px !important;
+    z-index: 0;
 }
 .mat-badge-content {
     color: #bc157c !important;
